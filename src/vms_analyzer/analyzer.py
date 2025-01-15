@@ -212,12 +212,25 @@ class VMSAnalyzer:
             hex_counts = {}
             total_points = 0
             active_points = 0
+            # Define datatypes para las columnas
+            dtypes = {
+                'Nombre': str,
+                'Razón Social': str,
+                'Puerto Base': str,
+                'Fecha': str,  # Se convertirá a datetime después si es necesario
+                'Latitud': float,
+                'Longitud': float,
+                'Velocidad': float
+            }
             
-            for chunk in tqdm(pd.read_csv(input_file, chunksize=self.chunk_size),
+            for chunk in tqdm(pd.read_csv(input_file, 
+                                        chunksize=self.chunk_size,
+                                        dtype=dtypes,
+                                        low_memory=False),
                             desc="Processing chunks"):
                 # Convert coordinates to H3 indexes
                 h3_indexes = [
-                    h3.geo_to_h3(lat, lon, resolution)
+                    h3.latlng_to_cell(lat, lon, resolution)
                     for lat, lon in zip(chunk['Latitud'], chunk['Longitud'])
                 ]
                 
@@ -237,7 +250,7 @@ class VMSAnalyzer:
             hexagons = []
             for h3_idx, counts in hex_counts.items():
                 # Get hexagon boundaries
-                boundaries = h3.h3_to_geo_boundary(h3_idx)
+                boundaries = h3.cell_to_boundary(h3_idx)
                 poly = Polygon(boundaries)
                 
                 # Calculate activity percentage
