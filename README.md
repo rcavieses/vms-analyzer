@@ -79,9 +79,21 @@ VMS Analyzer está diseñado para facilitar el desarrollo de modelos de intelige
 
 ## Instalación
 
+Since this package is not yet available on PyPI, you can install it directly from GitHub:
+
 ```bash
-pip install vms-analyzer
-```
+# Create and activate conda environment
+conda create -n vms_env python=3.8
+conda activate vms_env
+
+# Install dependencies
+conda install -c conda-forge pandas geopandas numpy shapely tqdm matplotlib
+conda install -c conda-forge h3-py contextily loguru
+
+# Clone and install the package
+git clone https://github.com/tu_usuario/vms-analyzer.git
+cd vms-analyzer
+pip install -e .
 
 ## Uso Básico
 
@@ -174,18 +186,18 @@ Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](L
 Si utilizas VMS Analyzer en tu investigación, por favor cítalo como:
 
 ```bibtex
-@software{vms_analyzer2024,
-  author = {Your Name},
+@software{vms_analyzer2025,
+  author = {Ricardo Cavieses},
   title = {VMS Analyzer: A Python Library for Fishing Vessel Monitoring System Analysis},
-  year = {2024},
+  year = {2025},
   publisher = {GitHub},
   journal = {GitHub repository},
-  url = {https://github.com/yourusername/vms-analyzer}
+  url = {https://github.com/rcavieses/vms-analyzer}
 }
 ```
 
 ## Contacto
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
+Ricardo Cavieses - caviesesl@uabcs.mx
 
-Project Link: [https://github.com/yourusername/vms-analyzer](https://github.com/yourusername/vms-analyzer)
+Project Link: [https://github.com/rcavieses/vms-analyzer](https://github.com/rcavieses/vms-analyzer)
