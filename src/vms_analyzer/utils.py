@@ -6,6 +6,7 @@ import geopandas as gpd
 import numpy as np
 from shapely.geometry import Point, Polygon
 import h3
+import folium
 import matplotlib.pyplot as plt
 import contextily as ctx
 from pathlib import Path
@@ -28,7 +29,8 @@ def setup_directories(base_path: Path) -> Dict[str, Path]:
         'filtered': base_path / 'filtered',
         'classified': base_path / 'classified',
         'analysis': base_path / 'analysis',
-        'logs': base_path / 'logs'
+        'logs': base_path / 'logs',
+        'reports': base_path / 'reports'
     }
     
     for dir_path in dirs.values():
@@ -234,3 +236,85 @@ def create_effort_map(hex_gdf: gpd.GeoDataFrame,
         if plt.get_fignums():
             plt.close()
         raise
+def generate_html_report(map_obj: folium.Map, stats: Dict) -> str:
+    """
+    Generates an HTML report with analysis results.
+    
+    Args:
+        map_obj: Folium map object
+        stats: Dictionary with summary statistics
+        
+    Returns:
+        HTML content as string
+    """
+    # Get map HTML
+    map_html = map_obj._repr_html_()
+    
+    # Create HTML template
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Reporte de Análisis VMS</title>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }}
+            .stats-container {{
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                margin-bottom: 20px;
+            }}
+            .stat-box {{
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }}
+            .map-container {{
+                width: 100%;
+                height: 600px;
+                margin-top: 20px;
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>Reporte de Análisis VMS</h1>
+        
+        <h2>Estadísticas Generales</h2>
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Puntos Totales</h3>
+                <p>{stats['total_points']:,}</p>
+            </div>
+            <div class="stat-box">
+                <h3>Puntos Activos</h3>
+                <p>{stats['active_points']:,}</p>
+            </div>
+            <div class="stat-box">
+                <h3>Porcentaje de Actividad</h3>
+                <p>{stats['activity_percentage']:.1f}%</p>
+            </div>
+            <div class="stat-box">
+                <h3>Hexágonos Únicos</h3>
+                <p>{stats['unique_hexagons']:,}</p>
+            </div>
+            <div class="stat-box">
+                <h3>Promedio de Puntos por Hexágono</h3>
+                <p>{stats['avg_points_per_hexagon']:.1f}</p>
+            </div>
+        </div>
+        
+        <h2>Mapa de Actividad</h2>
+        <div class="map-container">
+            {map_html}
+        </div>
+    </body>
+    </html>
+    """
+    
+    return html_content
