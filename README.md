@@ -1,10 +1,5 @@
 # VMS Analyzer
 
-[![PyPI version](https://badge.fury.io/py/vms-analyzer.svg)](https://badge.fury.io/py/vms-analyzer)
-[![Tests](https://github.com/yourusername/vms-analyzer/actions/workflows/tests.yml/badge.svg)](https://github.com/yourusername/vms-analyzer/actions/workflows/tests.yml)
-[![Documentation Status](https://readthedocs.org/projects/vms-analyzer/badge/?version=latest)](https://vms-analyzer.readthedocs.io/en/latest/?badge=latest)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
 ## Acerca de los Sistemas de Monitoreo de Embarcaciones (VMS)
 
 Los Sistemas de Monitoreo de Embarcaciones (VMS, por sus siglas en inglés) son una herramienta fundamental en la gestión moderna de la pesca. Estos sistemas utilizan transpondedores instalados en embarcaciones pesqueras para transmitir periódicamente datos sobre:
