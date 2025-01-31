@@ -105,6 +105,33 @@ filtered_file = analyzer.filter_by_polygon(unified_file)
 classified_file = analyzer.classify_fishing_activity(filtered_file)
 results = analyzer.analyze_fishing_effort(classified_file)
 ```
+## Instalación en R
+```R
+Para instalar y utilizar la librería de Python vms-analyzer desde RStudio, puedes seguir estos pasos:
+
+Instalar y cargar el paquete reticulate:
+
+
+# Primero asegurate de tener python en tu sistema.
+# Usa la librería de reticulate para integrar modulos de python a R
+install.packages("reticulate")
+library(reticulate)
+
+#Crear y activar un entorno virtual de Python:
+
+virtualenv_create("vms-analyzer-env")
+use_virtualenv("vms-analyzer-env", required = TRUE)
+
+#Instalar la librería vms-analyzer desde GitHub:
+
+py_install("git+https://github.com/rcavieses/vms-analyzer.git")
+
+#Importar y utilizar la librería en R:
+vms_analyzer <- import("vms_analyzer")
+
+#Si encuentras un error indicando que falta el módulo folium, puedes instalarlo con:
+py_install("folium")
+```
 
 ## Ejemplos de Uso
 
