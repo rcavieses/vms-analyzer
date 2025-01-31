@@ -106,11 +106,9 @@ classified_file = analyzer.classify_fishing_activity(filtered_file)
 results = analyzer.analyze_fishing_effort(classified_file)
 ```
 ## Instalación en R
-```R
 Para instalar y utilizar la librería de Python vms-analyzer desde RStudio, puedes seguir estos pasos:
 
-Instalar y cargar el paquete reticulate:
-
+```R
 
 # Primero asegurate de tener python en tu sistema.
 # Usa la librería de reticulate para integrar modulos de python a R
